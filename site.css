@@ -169,3 +169,15 @@ body { background: var(--paper); color: var(--ink); font: 400 17px/1.6 var(--tex
   .sheet__strip { gap: 6px; padding: 20px 8px; }
   .form { padding: 22px; }
 }
+
+/* Фишка: щелчок вспышки, кадры проявляются из пересвета; при прокрутке плёнка протягивается. */
+@media (prefers-reduced-motion: no-preference) {
+  .sheet::after { content: ''; position: absolute; inset: 0; background: #fff; pointer-events: none; opacity: 0; animation: flash .7s .15s ease-out both; }
+  @keyframes flash { 12% { opacity: .95; } to { opacity: 0; } }
+  .frame > svg:first-child { animation: develop 1.4s .3s ease-out both; }
+  @keyframes develop { from { filter: brightness(2.6) contrast(.3); } }
+  @supports (animation-timeline: scroll()) {
+    .sheet__strip { animation: advance linear both; animation-timeline: scroll(root); animation-range: 0 100vh; }
+    @keyframes advance { to { background-position: -176px 2px, -176px calc(100% - 2px); } }
+  }
+}
