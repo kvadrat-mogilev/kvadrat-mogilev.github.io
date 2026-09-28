@@ -181,3 +181,10 @@ body { background: var(--paper); color: var(--ink); font: 400 17px/1.6 var(--tex
     @keyframes advance { to { background-position: -176px 2px, -176px calc(100% - 2px); } }
   }
 }
+
+/* Фон секции: ИИ-текстура (Cloudflare Workers AI) под заливкой цвета сайта — декор, не фото бизнеса.
+   На компьютере картинка закреплена за окном — при прокрутке секция работает как окно (параллакс). */
+.easy { background: linear-gradient(color-mix(in srgb, var(--ink) 60%, transparent), color-mix(in srgb, var(--ink) 82%, transparent)), url('img/bg-easy.webp') center / cover var(--ink); }
+@media (hover: hover) and (pointer: fine) {
+  .easy { background-attachment: scroll, fixed; }
+}
